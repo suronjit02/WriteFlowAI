@@ -45,8 +45,8 @@ A full-stack AI-powered SaaS content platform built with Next.js 14.
 1. Clone the repo
 
 ```bash
-git clone https://github.com/suronjit02/writeflow-ai.git
-cd writeflow-ai
+git clone https://github.com/suronjit02/WriteFlowAI.git
+cd WriteFlowAI
 ```
 
 2. Install dependencies
