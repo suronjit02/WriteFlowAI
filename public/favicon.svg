@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Background rounded square -->
+  <rect width="32" height="32" rx="8" fill="#6366F1"/>
+  <!-- Pen tool icon (simplified, centered) -->
+  <!-- Pen body: diagonal line from top-right to center -->
+  <g transform="translate(6, 6)">
+    <!-- Pen nib triangle at bottom-left -->
+    <path
+      d="M3 17 L2 20 L5 19 Z"
+      fill="white"
+    />
+    <!-- Pen shaft -->
+    <path
+      d="M5 17 L15 7 L17 5 C17.8 4.2 19.2 4.2 20 5 C20.8 5.8 20.8 7.2 20 8 L18 10 L8 20 Z"
+      fill="white"
+    />
+    <!-- Pen clip line (accent) -->
+    <line x1="14" y1="8" x2="16" y2="6" stroke="#A5B4FC" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+</svg>
