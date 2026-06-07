@@ -24,12 +24,12 @@ import { Badge } from "@/components/ui/badge";
 import {
   Search,
   Star,
-  Sparkles,
   Filter,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
 import ExploreLoading from "./loading";
+import Image from "next/image";
 
 interface Template {
   id: string;
@@ -39,6 +39,13 @@ interface Template {
   rating: number;
   usage_count: number;
   tone: string;
+}
+
+const CATEGORY_IMAGES: Record<string, string> = {
+  blog: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=200&fit=crop",
+  social: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=200&fit=crop",
+  email: "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=400&h=200&fit=crop",
+  ad: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop",
 }
 
 export default function ExplorePage() {
@@ -84,14 +91,6 @@ export default function ExplorePage() {
   React.useEffect(() => {
     fetchTemplates();
   }, [fetchTemplates]);
-
-  const categoryLabels: Record<string, string> = {
-    all: "All Categories",
-    blog: "Blog Posts",
-    social: "Social Media",
-    email: "Email Newsletters",
-    ad: "Ad Copy",
-  };
 
   return (
     <div className="flex flex-col min-h-screen bg-muted/10">
@@ -219,13 +218,20 @@ export default function ExplorePage() {
               {templates.map((tmpl) => (
                 <Card
                   key={tmpl.id}
-                  className="card-hover flex flex-col h-full bg-card border-border overflow-hidden"
+                  className="card-hover group flex flex-col h-full bg-card border-border overflow-hidden"
                 >
-                  {/* Thumbnail area */}
-                  <div className="h-32 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center p-6 border-b border-border/50 relative">
-                    <Sparkles className="h-8 w-8 text-indigo-500/80 animate-pulse" />
+                  {/* Thumbnail image */}
+                  <div className="relative h-32 w-full overflow-hidden border-b border-border/50">
+                    <Image
+                      src={CATEGORY_IMAGES[tmpl.category] ?? CATEGORY_IMAGES.blog}
+                      alt={`${tmpl.category} template`}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     <span className="absolute top-3 left-3">
-                      <Badge className="bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border-none capitalize font-semibold">
+                      <Badge className="bg-white/90 dark:bg-black/70 text-indigo-700 dark:text-indigo-300 border-none capitalize font-semibold text-[10px] backdrop-blur-sm">
                         {tmpl.category}
                       </Badge>
                     </span>

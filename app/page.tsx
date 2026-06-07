@@ -33,6 +33,8 @@ import {
   Mail,
 } from "lucide-react";
 
+import Image from "next/image";
+
 interface Template {
   id: string;
   title: string;
@@ -41,6 +43,13 @@ interface Template {
   rating: number;
   usage_count: number;
   tone: string;
+}
+
+const CATEGORY_IMAGES: Record<string, string> = {
+  blog: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=200&fit=crop",
+  social: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=200&fit=crop",
+  email: "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=400&h=200&fit=crop",
+  ad: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop",
 }
 
 const typingWords = [
@@ -403,10 +412,17 @@ export default function LandingPage() {
           ) : (
             <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {popularTemplates.map((tmpl) => (
-                <Card key={tmpl.id} className="card-hover h-full bg-card">
-                  <div className="h-28 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-t-xl flex items-center justify-center relative border-b border-border/50">
-                    <Sparkles className="h-7 w-7 text-indigo-500/70 animate-pulse" />
-                    <Badge className="absolute top-3 left-3 bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 border-none text-[10px] font-semibold capitalize">
+                <Card key={tmpl.id} className="card-hover group h-full bg-card overflow-hidden">
+                  <div className="relative h-28 w-full overflow-hidden rounded-t-xl border-b border-border/50">
+                    <Image
+                      src={CATEGORY_IMAGES[tmpl.category] ?? CATEGORY_IMAGES.blog}
+                      alt={`${tmpl.category} template`}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                    <Badge className="absolute top-3 left-3 bg-white/90 dark:bg-black/70 text-indigo-700 dark:text-indigo-300 border-none text-[10px] font-semibold capitalize backdrop-blur-sm">
                       {tmpl.category}
                     </Badge>
                   </div>
